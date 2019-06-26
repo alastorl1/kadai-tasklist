@@ -37,11 +37,11 @@ public class Tasklist {
 	@Column(name = "updated_at", nullable = false)
 	private Timestamp updated_at;
 
-	public Integer getID(){
+	public Integer getId(){
 		return id;
 	}
 
-	public void setID(Integer id){
+	public void setId(Integer id){
 		this.id = id;
 	}
 
@@ -74,5 +74,6 @@ public class Tasklist {
 	}
 
 	public void setUpdated_at(Timestamp updated_at){
+		this.updated_at = updated_at;
 	}
 }
