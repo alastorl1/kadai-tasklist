@@ -4,11 +4,26 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <h2>id : ${tasklist.id} のタスク詳細ページ</h2>
-
-        <p>タイトル：<c:out value="${tasklist.title}" /></p>
-        <p>内容：<c:out value="${tasklist.content}" /></p>
-        <p>作成日時：<fmt:formatDate value="${tasklist.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-        <p>更新日時：<fmt:formatDate value="${tasklist.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+        <table border = "1">
+                    <tbody>
+                        <tr>
+                            <th>タイトル</th>
+                            <td><c:out value="${tasklist.title}" /></td>
+                        </tr>
+                        <tr>
+                            <th>メッセージ</th>
+                            <td><c:out value="${tasklist.content}" /></td>
+                        </tr>
+                        <tr>
+                            <th>作成日時</th>
+                            <td><fmt:formatDate value="${tasklist.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        </tr>
+                        <tr>
+                            <th>更新日時</th>
+                            <td><fmt:formatDate value="${tasklist.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        </tr>
+                    </tbody>
+                </table>
 
         <p><a href="${pageContext.request.contextPath}/index">一覧に戻る</a></p>
 

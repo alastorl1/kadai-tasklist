@@ -8,14 +8,16 @@
                 <tbody>
                     <tr>
                         <th>ID</th>
-                        <th>タイトル＞内容</th>
+                        <th>タイトル</th>
+                        <th>内容</th>
                         <th>作成日時</th>
                         <th>更新日時</th>
                     </tr>
                     <c:forEach var="tasklist" items="${tasklists}">
                     <tr>
                         <td><p><a href="${pageContext.request.contextPath}/show?id=${tasklist.id}"><c:out value="${tasklist.id}" /></a></p>
-                        <td><c:out value="${tasklist.title}"></c:out> &gt;<c:out value="${tasklist.content}" /></td>
+                        <td><c:out value="${tasklist.title}" /></td>
+                        <td><c:out value="${tasklist.content}"/></td>
                         <td><fmt:formatDate value="${tasklist.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         <td><fmt:formatDate value="${tasklist.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                     </tr>
