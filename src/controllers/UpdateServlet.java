@@ -2,8 +2,10 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Tasklist;
+import models.validators.TasklistValidator;
 import utils.DBUtil;
 /**
  * Servlet implementation class UpdateServlet
@@ -47,15 +50,27 @@ public class UpdateServlet extends HttpServlet {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             m.setUpdated_at(currentTime);
 
-            em.getTransaction().begin();
-            em.getTransaction().commit();
-            request.getSession().setAttribute("flush", "更新が完了しました。");
-            em.close();
+            List<String> errors = TasklistValidator.validate(m);
+            if(errors.size() > 0) {
+                em.close();
 
+                request.setAttribute("_token", request.getSession().getId());
+                request.setAttribute("tasklist", m);
+                request.setAttribute("errors", errors);
 
-            request.getSession().removeAttribute("tasklist_id");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasklists/edit.jsp");
+                rd.forward(request, response);
+            } else {
 
-            response.sendRedirect(request.getContextPath() + "/index");
+                em.getTransaction().begin();
+                em.getTransaction().commit();
+                request.getSession().setAttribute("flush", "更新が完了しました。");
+                em.close();
+
+                request.getSession().removeAttribute("tasklist_id");
+
+                response.sendRedirect(request.getContextPath() + "/index");
+            }
         }
     }
 }
