@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Tasklist;
-import models.validators.TasklistValidator;
+import models.Task;
+import models.validators.TaskValidator;
 import utils.DBUtil;
 /**
  * Servlet implementation class UpdateServlet
@@ -39,7 +39,7 @@ public class UpdateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
 
 
-            Tasklist m = em.find(Tasklist.class, (Integer)(request.getSession().getAttribute("tasklist_id")));
+            Task m = em.find(Task.class, (Integer)(request.getSession().getAttribute("tasklist_id")));
 
             String title = request.getParameter("title");
             m.setTitle(title);
@@ -50,7 +50,7 @@ public class UpdateServlet extends HttpServlet {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             m.setUpdated_at(currentTime);
 
-            List<String> errors = TasklistValidator.validate(m);
+            List<String> errors = TaskValidator.validate(m);
             if(errors.size() > 0) {
                 em.close();
 

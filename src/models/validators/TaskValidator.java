@@ -3,10 +3,10 @@ package models.validators;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Tasklist;
+import models.Task;
 
-public class TasklistValidator {
-    public static List<String> validate(Tasklist m) {
+public class TaskValidator {
+    public static List<String> validate(Task m) {
         List<String> errors = new ArrayList<String>();
 
         String title_error = _validateTitle(m.getTitle());

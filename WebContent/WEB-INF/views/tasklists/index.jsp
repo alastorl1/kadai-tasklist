@@ -18,7 +18,7 @@
                         <th>作成日時</th>
                         <th>更新日時</th>
                     </tr>
-                    <c:forEach var="tasklist" items="${tasklists}">
+                    <c:forEach var="tasklist" items="${tasks}">
                     <tr>
                         <td><p><a href="${pageContext.request.contextPath}/show?id=${tasklist.id}"><c:out value="${tasklist.id}" /></a></p>
                         <td><c:out value="${tasklist.title}" /></td>
@@ -31,8 +31,8 @@
         </table>
 
         <div id = "pagination">
-            (全 ${tasklists_count} 件) <br />
-            <c:forEach var = "i" begin = "1" end = "${((tasklists_count -1) / 15) + 1}" step ="1">
+            (全 ${tasks_count} 件) <br />
+            <c:forEach var = "i" begin = "1" end = "${((tasks_count -1) / 15) + 1}" step ="1">
                 <c:choose>
                     <c:when test="${i == page }">
                         <c:out value = "${i }" />&nbsp;

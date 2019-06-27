@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Tasklist;
+import models.Task;
 import utils.DBUtil;
 
 /**
@@ -40,19 +40,19 @@ public class IndexServlet extends HttpServlet {
            page = Integer.parseInt(request.getParameter("page"));
        }catch(NumberFormatException e){}
 
-       List<Tasklist> tasklists = em.createNamedQuery("getAllTasklists", Tasklist.class)
+       List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class)
                                        .setFirstResult(15 * (page - 1))
                                        .setMaxResults(15)
                                        .getResultList();
 
-       long tasklists_count = (long)em.createNamedQuery("getTasklistsCount", Long.class)
+       long tasks_count = (long)em.createNamedQuery("getTasksCount", Long.class)
                                        .getSingleResult();
 
 
        em.close();
 
-       request.setAttribute("tasklists", tasklists);
-       request.setAttribute("tasklists_count", tasklists_count);
+       request.setAttribute("tasks", tasks);
+       request.setAttribute("tasks_count", tasks_count);
        request.setAttribute("page", page);
 
        if(request.getSession().getAttribute("flush") != null){
