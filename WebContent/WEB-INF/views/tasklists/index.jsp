@@ -17,7 +17,7 @@
                         <td><p><a href="${pageContext.request.contextPath}/show?id=${tasklist.id}"><c:out value="${tasklist.id}" /></a></p>
                         <td><fmt:formatDate value="${tasklist.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         <td><fmt:formatDate value="${tasklist.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                        <td><c:out value="${tasklist.title}"></c:out> &gt; <c:out value="${tasklist.content}" /></td>
+                        <td><c:out value="${tasklist.title}"></c:out> &gt;<c:out value="${tasklist.content}" /></td>
                     </tr>
                     </c:forEach>
                 </tbody>
